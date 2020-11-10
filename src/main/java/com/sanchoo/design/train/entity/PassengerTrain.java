@@ -45,16 +45,16 @@ public class PassengerTrain extends Train {
         log.info("Removed passenger with index {} from train {}", index, this.getNumber());
     }
 
-    public void removePassenger(Passenger passenger) {
+    public boolean removePassenger(Passenger passenger) {
         log.info("Removing passenger {} from train {}", passenger.getTicket().getId(), this.getNumber());
         checkNotNull(passenger, "passenger is null");
         if(!passengers.contains(passenger)) {
             log.info("Passenger {} was not removed, because he is not in the train {}", passenger.getTicket().getId(), this.getNumber());
+            return false;
         }
-        else {
-            passengers.remove(passenger);
-            log.info("Removed passenger {} from train {}", passenger.getTicket().getId(), this.getNumber());
-        }
+        passengers.remove(passenger);
+        log.info("Removed passenger {} from train {}", passenger.getTicket().getId(), this.getNumber());
+        return true;
     }
 
     public void removeAllPassengers() {
